@@ -254,6 +254,9 @@ h1{font-family:Georgia,serif;font-size:clamp(42px,6vw,76px);line-height:.94;marg
  .svgSideNotes{grid-template-columns:1fr}
 }
 
+
+.stepnav{border:0;cursor:pointer;font:inherit}
+.stepnav:hover{filter:brightness(.98)}
 </style>
 </head>
 <body>
@@ -317,7 +320,7 @@ h1{font-family:Georgia,serif;font-size:clamp(42px,6vw,76px);line-height:.94;marg
  <div class="labtop">
   <button class="back" onclick="showCaseOverview()">← Case 01 Overview</button>
   <div class="steps">
-   <span class="step done">1 · Tiếp cận</span><span class="step active">2 · Thu thập & tổ chức</span><span class="step">3 · Đánh giá</span><span class="step">4 · Kế hoạch</span><span class="step">5 · Can thiệp & lượng giá</span>
+   <span class="step done">1 · Tiếp cận</span><button class="step stepnav active" id="step2Nav" onclick="startCase()">2 · Thu thập & tổ chức</button><button class="step stepnav" id="step3Nav" onclick="startStep3()">3 · Đánh giá</button><span class="step">4 · Kế hoạch</span><span class="step">5 · Can thiệp & lượng giá</span>
   </div>
  </div>
  <div class="labgrid">
@@ -380,8 +383,14 @@ function reset(){S={turn:0,max:8,avail:["recent","family","strength","leading","
 function hideAllMain(){["home","caseOverview","lab"].forEach(id=>{let e=document.getElementById(id);if(e)e.style.display="none"})}
 function showHome(){hideAllMain();document.getElementById("home").style.display="block";window.scrollTo(0,0)}
 function showCaseOverview(){hideAllMain();document.getElementById("caseOverview").style.display="block";window.scrollTo(0,0)}
-function startCase(){reset();hideAllMain();document.getElementById("lab").style.display="block";document.getElementById("sourceBtn").style.display="block";document.getElementById("sourceBox").style.display="none";let pg=document.getElementById("phaseGuide");if(pg)pg.style.display="block";document.querySelector(".turnline strong").textContent="2A · Phỏng vấn & thu thập";render();window.scrollTo(0,0)}
-function startStep3(){reset();hideAllMain();document.getElementById("lab").style.display="block";openAssessment();window.scrollTo(0,0)}
+let CURRENT_STEP=2;
+function setActiveStep(n){CURRENT_STEP=n;
+ let s2=document.getElementById("step2Nav"),s3=document.getElementById("step3Nav");
+ if(s2)s2.classList.toggle("active",n===2);
+ if(s3)s3.classList.toggle("active",n===3);
+}
+function startCase(){reset();hideAllMain();document.getElementById("lab").style.display="block";setActiveStep(2);document.getElementById("sourceBtn").style.display="block";document.getElementById("sourceBox").style.display="none";let pg=document.getElementById("phaseGuide");if(pg)pg.style.display="block";document.querySelector(".turnline strong").textContent="2A · Phỏng vấn & thu thập";render();window.scrollTo(0,0)}
+function startStep3(){reset();hideAllMain();document.getElementById("lab").style.display="block";setActiveStep(3);document.querySelector(".turnline strong").textContent="3 · Đánh giá / chẩn đoán";openAssessment();window.scrollTo(0,0)}
 
 const ENGAGE=[
  {title:"1A · First Contact",mai:"Mai ngồi hơi nép vào ghế, nhìn xuống bàn. Đây là lần đầu em gặp nhân viên CTXH.",prompt:"Bạn sẽ mở đầu cuộc gặp như thế nào?",opts:[
@@ -555,7 +564,7 @@ function orgTab(t){
  }
  if(t==="r") el.innerHTML=`<div class="taskbox"><h3>Social Record · cập nhật hồ sơ xã hội</h3><p>Phân biệt dữ kiện có căn cứ với phần còn thiếu. “Chưa đủ thông tin” là một lựa chọn chuyên nghiệp.</p><div class="record">
  ${record("r1","Lý do tiếp cận","Thay đổi tham gia học, đau bụng ở trường, nghỉ học gần đây.")}${record("r2","Sức khỏe/đau bụng","Thường trước đi học hoặc tiết thể dục; hiếm ở nhà; chưa có chẩn đoán.")}${record("r3","Quan hệ bạn bè","Quan hệ với Vy/Trâm thay đổi; có bình luận về cơ thể.")}${record("r4","Quan hệ hôn nhân ba mẹ","Chưa có dữ liệu trực tiếp.")}${record("r5","Nguồn lực","Khả năng vẽ, GV Mỹ thuật, ba từng là người Mai tâm sự.")}${record("r6","Chẩn đoán tâm lý","Không có dữ liệu/chẩn đoán chuyên môn.")}
- </div><button class="checkbtn" onclick="checkRecord()">Kiểm tra hồ sơ</button><div id="rfb"></div><div class="bridge"><b>Cầu nối sang Step 3:</b> Khi dữ liệu đã được tổ chức, câu hỏi tiếp theo là: <b>những dữ liệu này có ý nghĩa gì, liên hệ với nhau thế nào, và điều gì vẫn chỉ là giả thuyết?</b><div class="step3cta"><button class="checkbtn" onclick="openAssessment()">Tiếp tục · Step 3 Đánh giá/chẩn đoán →</button></div></div></div>`;
+ </div><button class="checkbtn" onclick="checkRecord()">Kiểm tra hồ sơ</button><div id="rfb"></div><div class="bridge"><b>Cầu nối sang Step 3:</b> Khi dữ liệu đã được tổ chức, câu hỏi tiếp theo là: <b>những dữ liệu này có ý nghĩa gì, liên hệ với nhau thế nào, và điều gì vẫn chỉ là giả thuyết?</b><div class="step3cta"><button class="checkbtn" onclick="startStep3()">Tiếp tục · Step 3 Đánh giá/chẩn đoán →</button></div></div></div>`;
 }
 function ecoControl(id,label){return `<div class="ctrl" id="wrap_${id}"><b>${label}</b><select id="eco_${id}" onchange="drawEco()"><option value="">Chọn...</option><option value="exclude">Chưa đủ căn cứ đưa vào sơ đồ</option><option value="support">Hỗ trợ/tích cực</option><option value="limited">Kết nối nhưng hạn chế</option><option value="changed">Quan hệ thay đổi/xa cách</option><option value="stress">Căng thẳng/khó chịu</option><option value="service">Nguồn dịch vụ/hỗ trợ</option></select></div>`}
 function previewHousehold(){let v=document.getElementById("ghh").value,hh=document.getElementById("hh");hh.style.display=v==="parents"?"block":"none"}
@@ -631,6 +640,7 @@ const assessCards=[
 ];
 
 function openAssessment(){
+ if(CURRENT_STEP!==3)return;
  document.getElementById("sourceBtn").style.display="none";
  let pg=document.getElementById("phaseGuide");if(pg)pg.style.display="none";
  document.getElementById("sourceBox").style.display="none";
@@ -840,7 +850,6 @@ function checkPriority(){
  :`<b>Chưa hoàn tất.</b> Hãy kiểm tra lại vấn đề ưu tiên, nhu cầu của Mai, checklist và viết tối thiểu một đoạn đánh giá ngắn. Tránh chẩn đoán hoặc khẳng định “bắt nạt” khi dữ liệu chưa đủ.`}</div>`;
 }
 
-startStep3();
 </script>
 </body>
 </html>
