@@ -211,6 +211,20 @@ h1{font-family:Georgia,serif;font-size:clamp(42px,6vw,76px);line-height:.94;marg
 @media(max-width:760px){.problemTreeVisual{padding-left:0;padding-right:0}.ptCrown{min-height:185px;padding:26px 10px 36px;border-radius:42% 45% 36% 40% / 34% 34% 48% 48%}.ptTrunk{width:62%;min-width:0;padding:28px 10px 24px}.ptRoots{min-height:165px;padding:30px 10px 20px}.ptOutside{grid-template-columns:1fr}.ptChip{font-size:11.5px;padding:8px}.treeBank{grid-template-columns:1fr!important}.treeItem select{min-height:44px;font-size:16px}}
 @media(max-width:420px){.ptTrunk{width:72%}.ptCrown{padding-top:22px}.ptLabel{font-size:11px}}
 
+
+/* v17 teaching tree: model first, task second */
+.teachingTree{margin-top:20px;filter:drop-shadow(0 10px 14px rgba(39,75,61,.08))}
+.teachingTree .ptCrown{min-height:245px;background:linear-gradient(180deg,#dff0d5 0%,#bcd8ae 100%);border:2px solid #7fa278;border-radius:48% 52% 43% 47% / 45% 44% 55% 55%;padding:40px 22px 34px;overflow:visible}
+.leafBlob{position:absolute;border-radius:50%;background:linear-gradient(145deg,#a8ce83,#6e9d62);border:1px solid #789f6c;opacity:.95;z-index:-1}.leafBlob.l1{width:130px;height:92px;left:3%;top:17%}.leafBlob.l2{width:145px;height:100px;left:21%;top:-8%}.leafBlob.l3{width:155px;height:108px;left:43%;top:-13%}.leafBlob.l4{width:140px;height:98px;right:17%;top:-4%}.leafBlob.l5{width:125px;height:88px;right:1%;top:20%}
+.teachingTree .ptTrunk{width:44%;min-width:245px;margin:-22px auto 0;padding:38px 16px 30px;background:linear-gradient(90deg,#9d6544,#c98d5f 42%,#a96c47 72%,#865437);border:2px solid #815139;border-radius:24px 24px 34px 34px;box-shadow:inset 8px 0 0 rgba(255,255,255,.07),inset -7px 0 0 rgba(77,42,25,.08)}
+.teachingTree .ptRoots{min-height:210px;margin:-4px auto 0;padding:38px 20px 28px;background:radial-gradient(ellipse at center,#f3e7d4 0%,#ead8bd 62%,#e3cfb0 100%);border:2px solid #bd966c;border-radius:48% 48% 25px 25px / 28% 28% 18px 18px;overflow:hidden}
+.teachingTree .ptRoots:before,.teachingTree .ptRoots:after{height:80px;border-bottom:12px solid #9b6544;opacity:.9}.rootLine{position:absolute;height:75px;width:38%;border-bottom:8px solid #a86f49;border-radius:50%;bottom:16px;opacity:.9}.rootLine.r1{left:1%;transform:rotate(10deg)}.rootLine.r2{left:18%;transform:rotate(-7deg)}.rootLine.r3{right:18%;transform:rotate(7deg)}.rootLine.r4{right:1%;transform:rotate(-10deg)}
+.treeExplain{position:relative;z-index:4;margin:0 auto 12px;background:rgba(255,255,255,.93);border:1px solid rgba(62,99,79,.22);border-radius:22px;padding:12px 14px;text-align:center;max-width:430px;box-shadow:0 4px 12px rgba(34,67,53,.08)}.treeExplain b{display:block;color:var(--green);font-size:16px}.treeExplain small{display:block;font-weight:800;margin:2px 0 4px;color:#66786f}.treeExplain span{display:block;font-size:12px;line-height:1.35;color:#52645b}.trunkExplain{background:#fff8f0;border-color:#d4a27d}.trunkExplain b{color:#8b4c32}.rootExplain{background:#fffaf1;border-color:#c9a273}.rootExplain b{color:#7c5637}
+.teachingOutside{margin-top:14px}.teachingOutside .ptOutsideBox{padding:15px 16px;min-height:110px}.teachingOutside p{font-size:12px;line-height:1.4;margin:4px 0 10px;color:#5d6e66}.contextBox{background:#edf6f7;border-color:#9ec5cb!important}.contextBox h4{color:#326b78!important}
+.treeInstruction{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;margin:22px 0 12px;padding:14px 16px;border-radius:16px;background:#eef4ef;border:1px solid #cbdacf}.treeInstruction b{color:var(--green);font-size:16px}.treeInstruction span{font-size:13px;line-height:1.45;color:#43564d}
+@media(max-width:760px){.teachingTree .ptCrown{min-height:230px;padding:34px 10px 30px}.teachingTree .ptTrunk{width:66%;min-width:0;padding:34px 10px 28px}.teachingTree .ptRoots{min-height:205px;padding:34px 10px 25px}.treeExplain{padding:10px;max-width:92%}.treeExplain b{font-size:14px}.treeExplain span{font-size:11.5px}.leafBlob.l1{left:-5%}.leafBlob.l5{right:-5%}.treeInstruction{grid-template-columns:1fr;gap:5px}.teachingOutside{grid-template-columns:1fr}}
+@media(max-width:420px){.teachingTree .ptTrunk{width:76%}.teachingTree .ptCrown{min-height:220px}.treeExplain b{font-size:13px}.ptChip{font-size:11px}}
+
 </style>
 </head>
 <body>
@@ -693,23 +707,36 @@ const treeItems=[
 function renderProblemTree(){
  let el=document.getElementById("assessBody");
  el.innerHTML=`<div class="taskbox"><h3>3B · Problem Tree · Cây vấn đề</h3>
-  <p>Hãy tổ chức dữ liệu thành một <b>cây vấn đề thật sự</b>: <b>tán cây</b> là biểu hiện/hậu quả, <b>thân cây</b> là vấn đề trọng tâm, <b>rễ cây</b> là nguyên nhân/yếu tố liên quan. Những điều mới chỉ là bối cảnh hoặc giả thuyết được đặt <b>ngoài cây</b>.</p>
-  <div class="treeBank">${treeItems.map(x=>`<div class="treeItem ${x.ans==="hypothesis"||x.ans==="unsupported"?"hypo":""}" id="wrap_${x.id}"><b>${x.text}</b><select id="${x.id}" onchange="drawProblemTree()"><option value="">Đặt vào...</option><option value="effect">🍃 Tán cây · Biểu hiện/hậu quả</option><option value="core">🌳 Thân cây · Vấn đề trọng tâm</option><option value="cause">🌱 Rễ cây · Nguyên nhân/yếu tố liên quan</option><option value="context">↔ Yếu tố bối cảnh · ngoài cây</option><option value="hypothesis">? Giả thuyết cần xác minh · ngoài cây</option><option value="unsupported">⚠ Chưa đủ bằng chứng · ngoài cây</option></select></div>`).join("")}</div>
-  <div class="problemTreeVisual" aria-label="Cây vấn đề của Mai">
-   <div class="ptCrown"><div class="ptLabel">🍃 TÁN CÂY · BIỂU HIỆN / HẬU QUẢ</div><div class="ptChips" id="zone_effect"></div></div>
-   <div class="ptTrunk"><div class="ptLabel">🌳 THÂN CÂY · VẤN ĐỀ TRỌNG TÂM</div><div class="ptChips" id="zone_core"></div></div>
-   <div class="ptRoots"><div class="ptLabel">🌱 RỄ CÂY · NGUYÊN NHÂN / YẾU TỐ LIÊN QUAN</div><div class="ptChips" id="zone_cause"></div></div>
+  <p>Trước khi làm, hãy đọc hình cây: <b>tán cây</b> thể hiện biểu hiện/hậu quả, <b>thân cây</b> là vấn đề trọng tâm, <b>rễ cây</b> là nguyên nhân/yếu tố liên quan. <b>Bối cảnh</b> và <b>giả thuyết chưa đủ bằng chứng</b> được giữ ngoài cây.</p>
+
+  <div class="problemTreeVisual teachingTree" aria-label="Mô hình cây vấn đề">
+   <div class="ptCrown">
+    <div class="leafBlob l1"></div><div class="leafBlob l2"></div><div class="leafBlob l3"></div><div class="leafBlob l4"></div><div class="leafBlob l5"></div>
+    <div class="treeExplain crownExplain"><b>🍃 HẬU QUẢ</b><small>Biểu hiện / vấn đề phát sinh</small><span>Những gì đang xảy ra hoặc phát sinh liên quan đến vấn đề.</span></div>
+    <div class="ptChips" id="zone_effect"></div>
+   </div>
+   <div class="ptTrunk">
+    <div class="treeExplain trunkExplain"><b>🎯 VẤN ĐỀ TRỌNG TÂM</b><small>Thân cây</small><span>Vấn đề chính cần được ưu tiên làm việc.</span></div>
+    <div class="ptChips" id="zone_core"></div>
+   </div>
+   <div class="ptRoots">
+    <div class="rootLine r1"></div><div class="rootLine r2"></div><div class="rootLine r3"></div><div class="rootLine r4"></div>
+    <div class="treeExplain rootExplain"><b>🌱 NGUYÊN NHÂN / YẾU TỐ LIÊN QUAN</b><small>Rễ cây</small><span>Các yếu tố có thể góp phần tạo nên hoặc duy trì vấn đề.</span></div>
+    <div class="ptChips" id="zone_cause"></div>
+   </div>
   </div>
-  <div class="ptOutside">
-   <div class="ptOutsideBox"><h4>↔ YẾU TỐ BỐI CẢNH · ngoài cây</h4><div class="ptChips" id="zone_context"></div></div>
-   <div class="ptOutsideBox hyp"><h4>? GIẢ THUYẾT / CHƯA ĐỦ BẰNG CHỨNG · ngoài cây</h4><div class="ptChips" id="zone_hypothesis"></div><div class="ptChips" id="zone_unsupported" style="margin-top:6px"></div></div>
+  <div class="ptOutside teachingOutside">
+   <div class="ptOutsideBox contextBox"><h4>👥 BỐI CẢNH</h4><p>Yếu tố môi trường có liên quan nhưng không nên tự động xem là nguyên nhân.</p><div class="ptChips" id="zone_context"></div></div>
+   <div class="ptOutsideBox hyp"><h4>❓ GIẢ THUYẾT / CHƯA ĐỦ BẰNG CHỨNG</h4><p>Nhận định ban đầu cần thêm thông tin để xác minh.</p><div class="ptChips" id="zone_hypothesis"></div><div class="ptChips" id="zone_unsupported" style="margin-top:6px"></div></div>
   </div>
+
+  <div class="treeInstruction"><b>🎯 Nhiệm vụ</b><span>Dựa trên thông tin đã thu thập ở Step 2, hãy phân loại từng dữ kiện vào vị trí phù hợp. Mỗi lần chọn, thẻ sẽ xuất hiện trên cây phía trên.</span></div>
+  <div class="treeBank">${treeItems.map(x=>`<div class="treeItem ${x.ans==="hypothesis"||x.ans==="unsupported"?"hypo":""}" id="wrap_${x.id}"><b>${x.text}</b><select id="${x.id}" onchange="drawProblemTree()"><option value="">Chọn vị trí...</option><option value="effect">🍃 Tán cây · Biểu hiện/hậu quả</option><option value="core">🌳 Thân cây · Vấn đề trọng tâm</option><option value="cause">🌱 Rễ cây · Nguyên nhân/yếu tố liên quan</option><option value="context">👥 Yếu tố bối cảnh · ngoài cây</option><option value="hypothesis">❓ Giả thuyết cần xác minh · ngoài cây</option><option value="unsupported">⚠ Chưa đủ bằng chứng · ngoài cây</option></select></div>`).join("")}</div>
   <button class="checkbtn" onclick="checkProblemTree()">Kiểm tra cây vấn đề</button><div id="tfb"></div>
-  <div class="bridge"><b>Nhìn lại hình cây:</b> Rễ không đồng nghĩa với “nguyên nhân đã được chứng minh”. Cây vấn đề giúp tổ chức và kiểm tra logic đánh giá; các giả thuyết chưa đủ bằng chứng phải được giữ ngoài cây để tiếp tục xác minh.</div>
+  <div class="bridge"><b>Lưu ý nghề nghiệp:</b> “Rễ” không có nghĩa là quan hệ nhân quả đã được chứng minh. Cây vấn đề là công cụ tổ chức và phân tích dữ liệu; giả thuyết phải tiếp tục được xác minh với thân chủ và các nguồn thông tin phù hợp.</div>
  </div>`;
  drawProblemTree();
 }
-
 function drawProblemTree(){
  ["effect","core","cause","context","hypothesis","unsupported"].forEach(z=>{let e=document.getElementById("zone_"+z);if(e)e.innerHTML=""});
  treeItems.forEach(x=>{
