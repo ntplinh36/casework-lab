@@ -257,6 +257,51 @@ h1{font-family:Georgia,serif;font-size:clamp(42px,6vw,76px);line-height:.94;marg
 
 .stepnav{border:0;cursor:pointer;font:inherit}
 .stepnav:hover{filter:brightness(.98)}
+
+/* Step 4 · intervention planning */
+.labgrid.focusedStep{grid-template-columns:220px minmax(0,1fr)}
+@media(max-width:980px){.labgrid.focusedStep{grid-template-columns:1fr}}
+.planHero{background:linear-gradient(115deg,#eaf2eb,#fbf0e5);border:1px solid var(--line);border-radius:22px;padding:23px;margin-bottom:16px}
+.planHero h2{font:700 clamp(25px,4vw,35px) Georgia,serif;margin:7px 0 10px}
+.planHero p{line-height:1.65;color:#53665d;margin:0}
+.planTabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 17px}
+.planTabs button{border:1px solid #cddbd2;background:#fff;border-radius:999px;padding:10px 14px;font-weight:800;color:var(--green);cursor:pointer;min-height:44px}
+.planTabs button.active{background:var(--green);color:#fff}
+.planPanel{border:1px solid var(--line);border-radius:17px;padding:18px;background:white}
+.planPanel h3{font:700 24px Georgia,serif;margin:0 0 9px}
+.planPanel p,.planPanel li{line-height:1.65;color:#52645c}
+.planGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.planField{background:#fafbf8;border:1px solid #dfe7df;border-radius:13px;padding:12px}
+.planField label{display:block;font-weight:800;font-size:13px;margin-bottom:8px}
+.planField select,.planField textarea,.planField input{width:100%;font:inherit;border:1px solid #c6d3c9;border-radius:10px;padding:11px;background:white;color:var(--ink);min-height:44px}
+.planField textarea{min-height:92px;resize:vertical}
+.planField.full{grid-column:1/-1}
+.planFeedback{background:#eef5ef;border-left:4px solid #6b9277;padding:13px 15px;border-radius:9px;margin-top:13px;line-height:1.6;font-size:13px}
+.planScenario{border-left:4px solid var(--terra);background:#fff4ed;padding:13px 15px;border-radius:12px;margin:12px 0;line-height:1.6}
+.planChoice{display:block;width:100%;text-align:left;border:1px solid #d7e1d9;background:#fff;border-radius:13px;padding:13px;margin:9px 0;cursor:pointer;line-height:1.5;min-height:48px;color:var(--ink)}
+.planChoice.selected{background:#e9f2eb;border-color:#4e8067;box-shadow:inset 0 0 0 1px #4e8067}
+.planChoice:focus-visible{outline:3px solid #9fc1a8}
+.planSummary{background:#f8f6ef;border:1px solid #e5dccc;border-radius:15px;padding:16px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.planActions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.planActions button{border:0;background:var(--green);color:white;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer}
+.planActions button.secondary{background:#e6ede8;color:var(--green)}
+.planPill{display:inline-block;background:#e3eee6;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;margin:3px}
+@media(max-width:640px){.planGrid{grid-template-columns:1fr}.planPanel{padding:13px}.planTabs button{flex:1 1 44%;font-size:12px}.planHero{padding:17px}}
+
+.planPanel input:not([type="checkbox"]){width:100%;min-height:42px;border:1px solid #cbd8d0;border-radius:10px;padding:9px 11px;font:inherit;margin:6px 0 12px}.planPanel .planChoice{cursor:pointer}.planPanel .planField{display:block}
+</style>
+<style>
+.p4export{user-select:text;-webkit-user-select:text;margin-top:16px;border:1px solid #b9c7bc;border-radius:12px;padding:16px;background:#fff;color:#213c34;line-height:1.55}
+.p4exportTitle{font-size:17px;font-weight:750;margin-bottom:12px}
+.p4aimline{padding:12px;background:#f3f6f0;border:1px solid #d4dfd5;margin-bottom:12px;border-radius:6px}
+.p4tableScroll{overflow-x:auto;max-width:100%}
+.p4planTable{border-collapse:collapse;width:100%;min-width:700px;table-layout:fixed;font-size:13px}
+.p4planTable th,.p4planTable td{border:1px solid #71877a;padding:10px;vertical-align:top;overflow-wrap:anywhere;text-align:left}
+.p4planTable th{background:#e8eee6;font-weight:700}
+.p4planTable th:nth-child(1){width:24%}.p4planTable th:nth-child(2){width:28%}.p4planTable th:nth-child(3){width:18%}.p4planTable th:nth-child(4){width:12%}.p4planTable th:nth-child(5){width:18%}
+.p4exportNote{border:1px solid #b9c7bc;border-top:0;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.p4draftNote{font-size:12px;color:#65766b;margin-top:12px}
+@media print{.p4tableScroll{overflow:visible}.p4planTable{min-width:0}}
 </style>
 </head>
 <body>
@@ -312,7 +357,8 @@ h1{font-family:Georgia,serif;font-size:clamp(42px,6vw,76px);line-height:.94;marg
   <article class="moduleCard"><div class="kicker" style="color:var(--terra)">STEP 1</div><h3>Tiếp cận & xây dựng mối quan hệ</h3><p>First Contact → Relationship Toolbox → phản ứng của thân chủ → xác định vấn đề ban đầu.</p><button onclick="startStep1()">Bắt đầu Step 1 →</button></article>
   <article class="moduleCard"><div class="kicker" style="color:var(--terra)">STEP 2</div><h3>Thu thập & tổ chức thông tin</h3><p>Phỏng vấn → nguồn thông tin khác → Genogram Practice → Ecomap → Hồ sơ xã hội.</p><button onclick="startCase()">Bắt đầu Step 2 →</button></article>
   <article class="moduleCard"><div class="kicker" style="color:var(--terra)">STEP 3</div><h3>Đánh giá / chẩn đoán</h3><p>Data ≠ Assessment → Cây vấn đề → Strengths & Systems → Đánh giá ưu tiên.</p><button onclick="startStep3()">Bắt đầu Step 3 →</button></article>
-  <article class="moduleCard locked"><div class="kicker">STEP 4–7</div><h3>Các bước tiếp theo</h3><p>Kế hoạch can thiệp → thực hiện → lượng giá → kết thúc. Sẽ được bổ sung theo tiến trình môn học.</p><button disabled>Sắp mở</button></article>
+  <article class="moduleCard"><div class="kicker" style="color:var(--terra)">STEP 4</div><h3>Xây dựng kế hoạch can thiệp</h3><p>Đồng thuận với Mai → mục tiêu SMART → lựa chọn hoạt động → kế hoạch & lượng giá.</p><button onclick="startStep4()">Bắt đầu Step 4 →</button></article>
+  <article class="moduleCard locked"><div class="kicker">STEP 5–7</div><h3>Các bước tiếp theo</h3><p>Thực hiện → lượng giá → kết thúc.</p><button disabled>Sắp mở</button></article>
  </div>
 </section>
 
@@ -320,7 +366,7 @@ h1{font-family:Georgia,serif;font-size:clamp(42px,6vw,76px);line-height:.94;marg
  <div class="labtop">
   <button class="back" onclick="showCaseOverview()">← Case 01 Overview</button>
   <div class="steps">
-   <span class="step done">1 · Tiếp cận</span><button class="step stepnav active" id="step2Nav" onclick="startCase()">2 · Thu thập & tổ chức</button><button class="step stepnav" id="step3Nav" onclick="startStep3()">3 · Đánh giá</button><span class="step">4 · Kế hoạch</span><span class="step">5 · Can thiệp & lượng giá</span>
+   <span class="step done">1 · Tiếp cận</span><button class="step stepnav active" id="step2Nav" onclick="startCase()">2 · Thu thập & tổ chức</button><button class="step stepnav" id="step3Nav" onclick="startStep3()">3 · Đánh giá</button><button class="step stepnav" id="step4Nav" onclick="startStep4()">4 · Kế hoạch</button><span class="step">5 · Can thiệp & lượng giá</span>
   </div>
  </div>
  <div class="labgrid">
@@ -385,12 +431,23 @@ function showHome(){hideAllMain();document.getElementById("home").style.display=
 function showCaseOverview(){hideAllMain();document.getElementById("caseOverview").style.display="block";window.scrollTo(0,0)}
 let CURRENT_STEP=2;
 function setActiveStep(n){CURRENT_STEP=n;
- let s2=document.getElementById("step2Nav"),s3=document.getElementById("step3Nav");
+ let s2=document.getElementById("step2Nav"),s3=document.getElementById("step3Nav"),s4=document.getElementById("step4Nav");
  if(s2)s2.classList.toggle("active",n===2);
  if(s3)s3.classList.toggle("active",n===3);
+ if(s4)s4.classList.toggle("active",n===4);
 }
-function startCase(){reset();hideAllMain();document.getElementById("lab").style.display="block";setActiveStep(2);document.getElementById("sourceBtn").style.display="block";document.getElementById("sourceBox").style.display="none";let pg=document.getElementById("phaseGuide");if(pg)pg.style.display="block";document.querySelector(".turnline strong").textContent="2A · Phỏng vấn & thu thập";render();window.scrollTo(0,0)}
-function startStep3(){reset();hideAllMain();document.getElementById("lab").style.display="block";setActiveStep(3);document.querySelector(".turnline strong").textContent="3 · Đánh giá / chẩn đoán";openAssessment();window.scrollTo(0,0)}
+function restoreStep2Layout(){
+ document.querySelector(".labgrid").classList.remove("focusedStep");
+ document.getElementById("sceneArt").style.display="block";
+ document.querySelector(".right").style.display="block";
+}
+function showPlanningLayout(){
+ document.querySelector(".labgrid").classList.add("focusedStep");
+ document.getElementById("sceneArt").style.display="none";
+ document.querySelector(".right").style.display="none";
+}
+function startCase(){reset();hideAllMain();restoreStep2Layout();document.getElementById("lab").style.display="block";setActiveStep(2);document.getElementById("sourceBtn").style.display="block";document.getElementById("sourceBox").style.display="none";let pg=document.getElementById("phaseGuide");if(pg)pg.style.display="block";document.querySelector(".turnline strong").textContent="2A · Phỏng vấn & thu thập";render();window.scrollTo(0,0)}
+function startStep3(){reset();hideAllMain();showPlanningLayout();document.getElementById("lab").style.display="block";setActiveStep(3);document.querySelector(".turnline strong").textContent="3 · Đánh giá / chẩn đoán";openAssessment();window.scrollTo(0,0)}
 
 const ENGAGE=[
  {title:"1A · First Contact",mai:"Mai ngồi hơi nép vào ghế, nhìn xuống bàn. Đây là lần đầu em gặp nhân viên CTXH.",prompt:"Bạn sẽ mở đầu cuộc gặp như thế nào?",opts:[
@@ -849,6 +906,56 @@ function checkPriority(){
  ?`<b>✓ Hoàn thành Step 3.</b> Đánh giá của bạn giữ được vấn đề ưu tiên ở mức dữ liệu hỗ trợ, phản ánh nhu cầu/mong muốn của Mai và có nhìn đến nguồn lực. Hãy giữ đoạn đánh giá này để đối chiếu khi sang Step 4.`
  :`<b>Chưa hoàn tất.</b> Hãy kiểm tra lại vấn đề ưu tiên, nhu cầu của Mai, checklist và viết tối thiểu một đoạn đánh giá ngắn. Tránh chẩn đoán hoặc khẳng định “bắt nạt” khi dữ liệu chưa đủ.`}</div>`;
 }
+
+
+// STEP 4 V2 — Aim → SMART Objectives → Activities → Intervention Plan
+const P4={tab:0,aim:'',aimNote:'',objectives:[{id:1,text:''}],activities:[],checks:{},consent:'',review:'',nextId:2};
+const P4T=['4A · Aims','4B · Objectives','4C · Activities','4D · Intervention Plan'];
+function p4e(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function p4save(k,v){P4[k]=v;}
+function p4tab(n){P4.tab=n;p4render();}
+function p4feedback(id,html,good=false){let e=document.getElementById(id);if(e)e.innerHTML='<div class="planFeedback" style="border-left:4px solid '+(good?'#4f916c':'#c08351')+'">'+html+'</div>';}
+function startStep4(){hideAllMain();showPlanningLayout();document.getElementById('lab').style.display='block';setActiveStep(4);document.querySelector('.turnline strong').textContent='4 · Xây dựng kế hoạch can thiệp';document.getElementById('turnLabel').textContent='Step 4 · Planning';document.getElementById('sourceBtn').style.display='none';document.getElementById('sourceBox').style.display='none';let pg=document.getElementById('phaseGuide');if(pg)pg.style.display='none';p4render();window.scrollTo(0,0);}
+function p4aim(v){P4.aim=v;p4render();}
+function p4obj(id,v){let o=P4.objectives.find(x=>x.id===id);if(o)o.text=v;}
+function p4addObj(){P4.objectives.push({id:P4.nextId++,text:''});p4render();}
+function p4removeObj(id){if(P4.objectives.length===1)return;P4.objectives=P4.objectives.filter(o=>o.id!==id);P4.activities=P4.activities.filter(a=>a.obj!==id);p4render();}
+function p4addAct(id){P4.activities.push({id:P4.nextId++,obj:id,task:'',who:'',when:'',indicator:''});p4render();}
+function p4act(id,key,val){let a=P4.activities.find(x=>x.id===id);if(a)a[key]=val;}
+function p4removeAct(id){P4.activities=P4.activities.filter(a=>a.id!==id);p4render();}
+function p4checkA(){let good=P4.aim==='b';p4feedback('p4fbA',good?'✓ Phù hợp: Aim là định hướng thay đổi tổng quát, xuất phát từ đánh giá Step 3 và mong muốn của Mai. Mục đích không phải chẩn đoán hay một hoạt động đơn lẻ.':'Cần xem lại: Aim trả lời “muốn tạo ra thay đổi tổng quát nào?”, không phải “sẽ làm hoạt động gì?” hoặc kết luận bệnh lý chưa được xác minh.',good);}
+function p4smart(t){let s=t.trim();return {length:s.length>=65,time:/\b(?:tuần|tháng|ngày|buổi|trong vòng|sau|trước ngày)\b/i.test(s),measure:/\d|ít nhất|tối thiểu|mỗi tuần|hằng tuần|theo dõi|thang|ghi nhận/i.test(s),actor:/Mai|em|thân chủ|NVCTXH/i.test(s),risk:/hết hoàn toàn|chắc chắn|bắt buộc|khỏi bệnh|không bao giờ|100%/i.test(s)};}
+function p4checkB(){let lines=[];let all=true;P4.objectives.forEach((o,i)=>{let q=p4smart(o.text),issues=[];if(!q.length)issues.push('diễn đạt rõ hành vi/kết quả cần đạt');if(!q.time)issues.push('thời hạn');if(!q.measure)issues.push('chỉ báo có thể kiểm chứng');if(!q.actor)issues.push('chủ thể thực hiện/thay đổi');if(q.risk)issues.push('tránh cam kết kết quả tuyệt đối hoặc áp đặt');if(issues.length)all=false;lines.push('<b>Mục tiêu '+(i+1)+':</b> '+(issues.length?'Cần rà soát '+issues.join(', ')+'.':'Có các dấu hiệu hình thức của mục tiêu SMART. Hãy tiếp tục đối chiếu tính khả thi, mức độ phù hợp và sự đồng thuận với Mai.'));});p4feedback('p4fbB',lines.join('<hr style="margin:9px 0;opacity:.25">')+'<p><small>Đây là kiểm tra gợi ý theo từ khóa, không tự chấm tính đúng đắn chuyên môn. Cô/nhóm cần đọc lại nội dung.</small></p>',all);}
+function p4checkC(){let lines=[],all=true;P4.objectives.forEach((o,i)=>{let acts=P4.activities.filter(a=>a.obj===o.id);if(!acts.length){all=false;lines.push('Mục tiêu '+(i+1)+' chưa có hoạt động nào.');return;}let bad=acts.filter(a=>!a.task.trim()||!a.who.trim()||!a.when.trim());if(bad.length){all=false;lines.push('Mục tiêu '+(i+1)+': '+bad.length+' hoạt động còn thiếu việc làm cụ thể, người thực hiện hoặc thời gian.');}else lines.push('✓ Mục tiêu '+(i+1)+' có '+acts.length+' hoạt động được mô tả. Nhóm hãy tự giải thích mỗi hoạt động đóng góp thế nào vào mục tiêu.');});p4feedback('p4fbC',lines.join('<p></p>')+'<p><b>Tự kiểm tra:</b> Có hoạt động nào công khai thông tin Mai trái mong muốn của em, hoặc biến giả thuyết thành chẩn đoán không?</p>',all);}
+function p4checkD(){let lines=[],all=true;if(P4.aim!=='b'){all=false;lines.push('Chưa xác định Aim phù hợp.');}P4.objectives.forEach((o,i)=>{if(!o.text.trim()){all=false;lines.push('Mục tiêu '+(i+1)+' chưa viết.');}let acts=P4.activities.filter(a=>a.obj===o.id);if(!acts.length){all=false;lines.push('Mục tiêu '+(i+1)+' chưa có hoạt động.');}acts.forEach((a,j)=>{if([a.task,a.who,a.when,a.indicator].some(v=>v.trim().length<5)){all=false;lines.push('Hoạt động '+(i+1)+'.'+(j+1)+' thiếu nội dung/người thực hiện/thời gian/chỉ báo.');}});});if(P4.consent.trim().length<25){all=false;lines.push('Cần ghi cách xác nhận ý kiến và sự đồng thuận của Mai.');}if(P4.review.trim().length<20){all=false;lines.push('Cần ghi cách theo dõi, lượng giá và điều chỉnh.');}p4show();p4feedback('p4fbD',all?'✓ Bản kế hoạch có đủ các trường cơ bản. Đây vẫn là bản dự thảo; cần thảo luận với Mai và kiểm tra chất lượng mục tiêu, tính khả thi, bảo mật và an toàn.':lines.join('<p></p>'),all);}
+function p4text(){let out=['CASEWORK LAB · CASE 01 – MAI','STEP 4 · DỰ THẢO KẾ HOẠCH CAN THIỆP','','AIM: '+(P4.aim==='b'?'Hỗ trợ Mai cải thiện sự tham gia và cảm giác thoải mái ở trường, tôn trọng mong muốn của em.':'(chưa xác định)')];P4.objectives.forEach((o,i)=>{out.push('','OBJECTIVE '+(i+1)+': '+(o.text||'(chưa viết)'));P4.activities.filter(a=>a.obj===o.id).forEach((a,j)=>out.push('  Hoạt động '+(i+1)+'.'+(j+1)+': '+a.task+' | Ai: '+a.who+' | Khi nào: '+a.when+' | Chỉ báo: '+a.indicator));});out.push('','Sự tham gia/đồng thuận của Mai: '+P4.consent,'Theo dõi/lượng giá/điều chỉnh: '+P4.review,'','Lưu ý: Dự thảo học tập, chưa phải kế hoạch được thân chủ chấp thuận.');return out.join('\n');}
+function p4table(){
+const aim=P4.aim==='b'?'Hỗ trợ Mai cải thiện sự tham gia và cảm giác thoải mái ở trường, tôn trọng mong muốn của em.':'(chưa xác định)';
+let rows='';
+P4.objectives.forEach((o,i)=>{const acts=P4.activities.filter(a=>a.obj===o.id);if(!acts.length){rows+=`<tr><td><b>Objective ${i+1}</b><div>${p4e(o.text||'(chưa viết)')}</div></td><td colspan="4">Chưa có hoạt động</td></tr>`;return;}
+acts.forEach((a,j)=>{rows+=`<tr>${j===0?`<td rowspan="${acts.length}"><b>Objective ${i+1}</b><div>${p4e(o.text||'(chưa viết)')}</div></td>`:''}<td><b>${i+1}.${j+1}</b> ${p4e(a.task||'—')}</td><td>${p4e(a.who||'—')}</td><td>${p4e(a.when||'—')}</td><td>${p4e(a.indicator||'—')}</td></tr>`;});});
+return `<div class="p4export"><div class="p4exportTitle">CASEWORK LAB · CASE 01 – MAI<br>STEP 4 · DỰ THẢO KẾ HOẠCH CAN THIỆP</div><div class="p4aimline"><b>AIM · Mục đích:</b> ${p4e(aim)}</div><div class="p4tableScroll"><table class="p4planTable"><thead><tr><th>Mục tiêu SMART</th><th>Hoạt động can thiệp</th><th>Người thực hiện / phối hợp</th><th>Thời gian</th><th>Chỉ báo / kết quả kiểm chứng</th></tr></thead><tbody>${rows}</tbody></table></div><div class="p4exportNote"><b>Sự tham gia và đồng thuận của Mai:</b> ${p4e(P4.consent||'—')}</div><div class="p4exportNote"><b>Theo dõi, lượng giá và điều chỉnh:</b> ${p4e(P4.review||'—')}</div><p class="p4draftNote">Dự thảo học tập, chưa phải kế hoạch được thân chủ chấp thuận.</p></div>`;
+}
+function p4show(){let e=document.getElementById('p4summary');if(e)e.innerHTML=p4table();}
+function p4select(){
+ p4show();const el=document.querySelector('#p4summary .p4export');if(!el)return;
+ const range=document.createRange();range.selectNodeContents(el);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);
+ p4feedback('p4fbD','Đã chọn toàn bộ bảng. Nhấn Ctrl+C (trên điện thoại: Sao chép) rồi dán vào Word hoặc Google Docs.',true);
+}
+async function p4copy(){
+ const el=document.querySelector('#p4summary .p4export');if(!el){p4feedback('p4fbD','Hãy nhấn Kiểm tra toàn bộ kế hoạch để tạo bảng trước.');return;}
+ const html=el.outerHTML;let copied=false;
+ try{if(navigator.clipboard&&window.ClipboardItem&&navigator.clipboard.write){await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([p4text()],{type:'text/plain'})})]);copied=true;}}catch(e){}
+ if(!copied){try{const range=document.createRange();range.selectNodeContents(el);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);copied=document.execCommand('copy');if(copied)selection.removeAllRanges();}catch(e){}}
+ if(copied)p4feedback('p4fbD','✓ Đã sao chép bảng. Hãy dán vào Word hoặc Google Docs; đường kẻ bảng sẽ được giữ khi trình duyệt hỗ trợ sao chép định dạng.',true);
+ else p4select();
+}
+function p4render(){let body='';
+if(P4.tab===0){body=`<h3>4A · AIMS – Mục đích can thiệp</h3><p><b>Lý thuyết:</b> Aim mô tả thay đổi tổng quát mà quá trình trợ giúp hướng đến. Aim dựa trên đánh giá vấn đề ưu tiên và mong muốn của thân chủ; chưa phải hoạt động cụ thể và không cần chi tiết như một mục tiêu SMART.</p><div class="planScenario"><b>Case 01 – Mai:</b> Mai muốn những bình luận về cơ thể dừng lại nhưng không muốn bị nêu tên trước lớp. Em ít tham gia hoạt động trường học, nhất là trong tình huống liên quan đến Thể dục và bạn bè.</div><b>Chọn Aim phù hợp nhất:</b><div class="planChoice ${P4.aim==='a'?'selected':''}" onclick="p4aim('a')">A. Tổ chức ba buổi trò chuyện và một buổi sinh hoạt lớp.</div><div class="planChoice ${P4.aim==='b'?'selected':''}" onclick="p4aim('b')">B. Hỗ trợ Mai cải thiện sự tham gia và cảm giác thoải mái ở trường, tôn trọng mong muốn của em.</div><div class="planChoice ${P4.aim==='c'?'selected':''}" onclick="p4aim('c')">C. Điều trị dứt điểm rối loạn lo âu của Mai.</div><div class="planActions"><button onclick="p4checkA()">Kiểm tra Aim</button><button class="secondary" onclick="p4tab(1)">Tiếp 4B →</button></div><div id="p4fbA"></div>`;}
+if(P4.tab===1){body=`<h3>4B · OBJECTIVES – Mục tiêu SMART</h3><p><b>Lý thuyết:</b> Aim được cụ thể hóa thành <b>một hoặc nhiều objectives</b>. Mỗi objective cần <b>S</b>pecific (cụ thể), <b>M</b>easurable (đo lường được), <b>A</b>chievable (khả thi), <b>R</b>elevant (phù hợp), <b>T</b>ime-bound (có thời hạn). Mục tiêu mô tả thay đổi/kết quả cần đạt, <b>không phải danh sách hoạt động</b>.</p><div class="planScenario"><b>Thử phân tích một mục tiêu còn mơ hồ:</b> “Giúp Mai tự tin hơn khi đến trường.”<br><small>Mục tiêu này còn thiếu những yếu tố SMART nào? Đừng sao chép câu trên: nhóm hãy tự chọn một thay đổi ưu tiên, xác định cách kiểm chứng và thời hạn phù hợp.</small></div>${P4.objectives.map((o,i)=>`<div class="planField" style="margin:12px 0"><label>Mục tiêu ${i+1} <small>(Objective ${i+1})</small></label><textarea oninput="p4obj(${o.id},this.value)" placeholder="Nhóm muốn Mai đạt được thay đổi cụ thể nào? Viết mục tiêu của nhóm tại đây.">${p4e(o.text)}</textarea>${P4.objectives.length>1?`<button class="secondary" onclick="p4removeObj(${o.id})">Xóa mục tiêu này</button>`:''}</div>`).join('')}<div class="bridge"><b>Tự kiểm tra trước khi thêm mục tiêu:</b> Mục tiêu mới hướng đến thay đổi nào khác mục tiêu trước? Mỗi mục tiêu đóng góp gì vào Aim chung?</div><div class="planActions"><button class="secondary" onclick="p4addObj()">+ Thêm mục tiêu SMART</button><button onclick="p4checkB()">Kiểm tra từng mục tiêu</button><button class="secondary" onclick="p4tab(2)">Tiếp 4C →</button></div><div id="p4fbB"></div>`;}
+if(P4.tab===2){body=`<h3>4C · ACTIVITIES – Hoạt động phục vụ mục tiêu</h3><p><b>Lý thuyết:</b> Mỗi objective có thể cần <b>một hoặc nhiều hoạt động</b>. Hoạt động trả lời: làm gì, với ai, khi nào? Hãy chọn hoạt động vì nó đóng góp cho mục tiêu, không phải vì hoạt động nghe có vẻ hay.</p><div class="planScenario"><b>Tự hỏi trước khi thêm hoạt động:</b> Hoạt động này giúp đạt Objective nào? Nếu bỏ hoạt động đó, mục tiêu có còn khả thi không? Một Objective có thể có nhiều hoạt động, nhưng không phải hoạt động nào cũng cần thiết. Hãy tôn trọng mong muốn không bị nêu tên công khai của Mai.</div>${P4.objectives.map((o,i)=>`<div class="planField" style="margin:14px 0"><b>Objective ${i+1}: ${p4e(o.text)||'(chưa viết mục tiêu)'}</b>${P4.activities.filter(a=>a.obj===o.id).map((a,j)=>`<div style="padding:12px;border:1px solid #d7dfd8;border-radius:14px;margin:10px 0"><b>Hoạt động ${i+1}.${j+1}</b><label>Hoạt động cụ thể</label><textarea oninput="p4act(${a.id},'task',this.value)" placeholder="Nhóm sẽ thực hiện điều gì?">${p4e(a.task)}</textarea><label>Ai thực hiện/phối hợp?</label><input value="${p4e(a.who)}" oninput="p4act(${a.id},'who',this.value)" placeholder="Mai, NVCTXH, giáo viên..."/><label>Thời điểm</label><input value="${p4e(a.when)}" oninput="p4act(${a.id},'when',this.value)" placeholder="Tuần 1, tuần 2..."/><button class="secondary" onclick="p4removeAct(${a.id})">Xóa hoạt động</button></div>`).join('')}<button class="secondary" onclick="p4addAct(${o.id})">+ Thêm hoạt động cho Objective ${i+1}</button></div>`).join('')}<div class="planActions"><button onclick="p4checkC()">Kiểm tra các hoạt động</button><button class="secondary" onclick="p4tab(3)">Tiếp 4D →</button></div><div id="p4fbC"></div>`;}
+if(P4.tab===3){body=`<h3>4D · INTERVENTION PLAN – Bản kế hoạch can thiệp</h3><p><b>Lý thuyết:</b> Kế hoạch nối Aim → Objectives → Activities, bổ sung <b>người phụ trách, thời gian, nguồn lực, chỉ báo theo dõi và cách lượng giá</b>. Các chỉ báo phải phản ánh tiến triển hướng đến mục tiêu, không chỉ đếm số buổi hoạt động.</p><div class="planScenario"><b>Aim:</b> ${P4.aim==='b'?'Hỗ trợ Mai cải thiện sự tham gia và cảm giác thoải mái ở trường.':'Chưa chọn Aim phù hợp ở 4A.'}</div>${P4.objectives.map((o,i)=>`<div class="planField" style="margin:12px 0"><b>Objective ${i+1}: ${p4e(o.text)||'(chưa viết)'}</b>${P4.activities.filter(a=>a.obj===o.id).map((a,j)=>`<div style="padding:12px;border:1px solid #d7dfd8;border-radius:14px;margin:10px 0"><b>Hoạt động ${i+1}.${j+1}:</b> ${p4e(a.task)||'(chưa ghi)'}<p><small>Người thực hiện: ${p4e(a.who)||'—'} · Thời gian: ${p4e(a.when)||'—'}</small></p><label>Chỉ báo/kết quả kiểm chứng cho hoạt động này</label><textarea oninput="p4act(${a.id},'indicator',this.value)" placeholder="Làm sao biết hoạt động góp phần đạt objective?">${p4e(a.indicator)}</textarea></div>`).join('')||'<p>Chưa có hoạt động cho mục tiêu này. Quay lại 4C để bổ sung.</p>'}</div>`).join('')}<div class="planField"><label>Cách xác nhận tiếng nói và sự đồng thuận của Mai</label><textarea oninput="p4save('consent',this.value)" placeholder="Trao đổi riêng, giải thích lựa chọn, xin ý kiến...">${p4e(P4.consent)}</textarea></div><div class="planField"><label>Theo dõi, lượng giá và điều chỉnh kế hoạch</label><textarea oninput="p4save('review',this.value)" placeholder="Thời điểm đánh giá; nguồn dữ liệu; cùng ai xem lại...">${p4e(P4.review)}</textarea></div><div class="planActions"><button onclick="p4checkD()">Kiểm tra toàn bộ kế hoạch</button><button class="secondary" onclick="p4copy()">Sao chép bảng kế hoạch</button><button class="secondary" onclick="p4select()">Chọn bảng để sao chép thủ công</button></div><div id="p4fbD"></div><div id="p4summary" aria-live="polite"></div>`;}
+document.getElementById('gameArea').innerHTML=`<div class="planHero"><div class="kicker" style="color:var(--terra)">STEP 4 · INTERVENTION PLANNING</div><h2>Từ mục đích đến kế hoạch can thiệp</h2><p><b>AIMS → OBJECTIVES (SMART) → ACTIVITIES → INTERVENTION PLAN</b></p><p>Một Aim có thể có nhiều Objectives; một Objective có thể có nhiều hoạt động. Sau mỗi phần, nhóm bấm <b>Kiểm tra</b> để nhận phản hồi trước khi tiếp tục.</p></div><div class="planTabs">${P4T.map((t,i)=>`<button class="${P4.tab===i?'active':''}" onclick="p4tab(${i})">${t}</button>`).join('')}</div><div class="planPanel">${body}</div>`;}
 
 </script>
 </body>
